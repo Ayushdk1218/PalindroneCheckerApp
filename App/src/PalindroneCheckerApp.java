@@ -24,14 +24,26 @@ public class PalindroneCheckerApp {
 
     public static boolean isPalindrome(String str) {
 
+
         String cleanStr = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-        String reversed = "";
 
-        for (int i = cleanStr.length() - 1; i >= 0; i--) {
-            reversed = reversed + cleanStr.charAt(i);
+        char[] charArray = cleanStr.toCharArray();
+
+
+        int start = 0;
+        int end = charArray.length - 1;
+
+        while (start < end) {
+
+            if (charArray[start] != charArray[end]) {
+                return false;
+            }
+
+            start++;
+            end--;
         }
 
-        return cleanStr.equals(reversed);
+        return true;
     }
 }
