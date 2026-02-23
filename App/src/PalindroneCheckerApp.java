@@ -2,6 +2,7 @@
 //Author Ayush Dungrakoti
 //useCase 1: Welcome page
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindroneCheckerApp {
     public static void main(String[] args) {
@@ -28,20 +29,18 @@ public class PalindroneCheckerApp {
         String cleanStr = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
 
-        char[] charArray = cleanStr.toCharArray();
+        Stack<Character> stack = new Stack<>();
 
 
-        int start = 0;
-        int end = charArray.length - 1;
+        for (int i = 0; i < cleanStr.length(); i++) {
+            stack.push(cleanStr.charAt(i));
+        }
 
-        while (start < end) {
 
-            if (charArray[start] != charArray[end]) {
+        for (int i = 0; i < cleanStr.length(); i++) {
+            if (cleanStr.charAt(i) != stack.pop()) {
                 return false;
             }
-
-            start++;
-            end--;
         }
 
         return true;
