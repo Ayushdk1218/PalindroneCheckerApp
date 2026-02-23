@@ -3,6 +3,8 @@
 //useCase 1: Welcome page
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindroneCheckerApp {
     public static void main(String[] args) {
@@ -25,20 +27,26 @@ public class PalindroneCheckerApp {
 
     public static boolean isPalindrome(String str) {
 
-
+        // Remove special characters and convert to lowercase
         String cleanStr = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
-
+        // Create Stack (LIFO)
         Stack<Character> stack = new Stack<>();
 
+        // Create Queue (FIFO)
+        Queue<Character> queue = new LinkedList<>();
 
+        // Enqueue and Push characters
         for (int i = 0; i < cleanStr.length(); i++) {
-            stack.push(cleanStr.charAt(i));
+            char ch = cleanStr.charAt(i);
+            stack.push(ch);     // LIFO
+            queue.add(ch);      // FIFO
         }
 
+        // Compare dequeue (queue) with pop (stack)
+        while (!stack.isEmpty()) {
 
-        for (int i = 0; i < cleanStr.length(); i++) {
-            if (cleanStr.charAt(i) != stack.pop()) {
+            if (!queue.remove().equals(stack.pop())) {
                 return false;
             }
         }
